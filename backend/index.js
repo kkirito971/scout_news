@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 import express from "express";
 import connectDB from "./lib/connectDB.js";
 import userRouter from "./routes/user.route.js";
@@ -9,10 +11,22 @@ import cors from "cors";
 
 const app = express();
 
-app.use(cors(process.env.CLIENT_URL));
-app.use(clerkMiddleware());
 app.use("/webhooks", webhookRouter);
+
 app.use(express.json());
+
+app.use(clerkMiddleware());
+
+// app.use(cors(process.env.CLIENT_URL));
+app.use(cors({
+  origin: process.env.CLIENT_URL,
+  credentials: true,
+}));
+
+
+
+
+
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -22,27 +36,6 @@ app.use(function (req, res, next) {
   );
   next();
 });
-
-// app.get("/test",(req,res)=>{
-//   res.status(200).send("it works!")
-// })
-
-// app.get("/auth-state", (req, res) => {
-//   const authState = req.auth;
-//   res.json(authState);
-// });
-
-// app.get("/protect", (req, res) => {
-//   const {userId} = req.auth;
-//   if(!userId){
-//     return res.status(401).json("not authenticated")
-//   }
-//   res.status(200).json("content")
-// });
-
-// app.get("/protect2", requireAuth(), (req, res) => {
-//   res.status(200).json("content")
-// });
 
 app.use("/users", userRouter);
 app.use("/posts", postRouter);

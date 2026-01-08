@@ -72,8 +72,8 @@ const SideMenu = () => {
       <h1 className="mt-8 mb-4 text-sm font-medium">Categories</h1>
       <div className="flex flex-col gap-2 text-sm">
         <span className="underline cursor-pointer" onClick={()=>handleCategoryChange("general")}>All</span>
-        <span className="underline cursor-pointer" onClick={()=>handleCategoryChange("web-design")}>Мэдээ</span>
-        <span className="underline cursor-pointer" onClick={()=>handleCategoryChange("development")}>Арга хэмжээ</span>
+        <span className="underline cursor-pointer" onClick={()=>handleCategoryChange("Мэдээ")}>Мэдээ</span>
+        <span className="underline cursor-pointer" onClick={()=>handleCategoryChange("Арга хэмжээ")}>Арга хэмжээ</span>
         {/* <span className="underline cursor-pointer" onClick={()=>handleCategoryChange("databases")}>Databases</span>
         <span className="underline cursor-pointer" onClick={()=>handleCategoryChange("seo")}>Search Engines</span>
         <span className="underline cursor-pointer" onClick={()=>handleCategoryChange("marketing")}>Marketing</span> */}

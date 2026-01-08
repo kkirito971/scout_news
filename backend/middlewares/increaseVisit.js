@@ -1,11 +1,36 @@
+// import Post from "../models/post.model.js";
+
+// const increaseVisit = async (req, res, next) => {
+//   const slug = req.params.slug;
+
+//   await Post.findOneAndUpdate({ slug }, { $inc: { visit: 1 } });
+
+//   next();
+// };
+
+// export default increaseVisit;
+
+
 import Post from "../models/post.model.js";
 
 const increaseVisit = async (req, res, next) => {
-  const slug = req.params.slug;
+  try {
+    const { slug } = req.params;
 
-  await Post.findOneAndUpdate({ slug }, { $inc: { visit: 1 } });
+    const post = await Post.findOneAndUpdate(
+      { slug },
+      { $inc: { visit: 1 } },
+      { new: true }
+    );
 
-  next();
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    next();
+  } catch (error) {
+    next(error); // global error handler руу явуулна
+  }
 };
 
 export default increaseVisit;
